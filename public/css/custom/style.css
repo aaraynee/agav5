@@ -1,0 +1,36 @@
+/* */
+
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
+
+body {
+    background: url('http://agatour.us/img/bg.png') no-repeat;
+    background-size: cover;
+    font-family:'Roboto Condensed',sans-serif;
+}
+
+h1,h2,h3,h4,h5 {
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #005391;
+    font-family:'Roboto Condensed',sans-serif;
+}
+
+p,a {
+    font-family:'Roboto Condensed',sans-serif;
+}
+
+.page-content {
+    padding: 20px 20px;
+    background: #ffffff;
+}
+
+/*--------------
+-   PLAYERS
+--------------*/
+
+li.player img { width: 20px; margin: 10px 10px; }
+li.player a { color: #005391; text-decoration: none; font-weight: 400; }
+
+/*--------------
+-   PLAYER
+--------------*/
