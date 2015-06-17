@@ -45,6 +45,11 @@ class Stats extends Command {
 	{
 		parent::__construct();
 	}
+    
+    public function season()
+	{
+        $this->comment("ewfewfewf");        
+    }
 
 	public function fire()
 	{

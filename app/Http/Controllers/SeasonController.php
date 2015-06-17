@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Season;
+use App\Player;
 
 class SeasonController extends Controller {
 
@@ -15,7 +16,9 @@ class SeasonController extends Controller {
 	}
     
     public function single($slug) {
-        $data['season'] = Season::where('slug', $slug)->first();        
+        $season = Season::where('slug', $slug)->first();
+        $data['season'] = $season;                
+        $data['players'] = $season->players();
 		return view('season/single', $data);
 	}
 }
