@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => env('APP_DEBUG', true),
+	'debug' => env('APP_DEBUG'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -109,7 +109,7 @@ return [
 	*/
 
 	'providers' => [
-        
+
         'Barryvdh\Debugbar\ServiceProvider',
 
 		/*
@@ -146,7 +146,7 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-        
+
         'Illuminate\Html\HtmlServiceProvider',
 	],
 
@@ -195,9 +195,9 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-        
-        
-        'Form'=> 'Illuminate\Html\FormFacade', 
+
+
+        'Form'=> 'Illuminate\Html\FormFacade',
         'HTML'=> 'Illuminate\Html\HtmlFacade',
 
 	],
