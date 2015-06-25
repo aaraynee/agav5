@@ -1,11 +1,12 @@
 /* */
 
 @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans:400,500,700);
 
 body {
     background: url('http://agatour.us/img/bg.png') no-repeat;
     background-size: cover;
-    font-family:'Roboto Condensed',sans-serif;
+    font-family: "AlegreyaSans", Arial, Helvetica, sans-serif;
 }
 
 h1,h2,h3,h4,h5 {
@@ -22,6 +23,18 @@ p,a {
 .page-content {
     padding: 20px 20px;
     background: #ffffff;
+}
+
+nav.uk-navbar {
+    background: #003865;
+}
+
+nav.uk-navbar ul li a {
+    text-shadow: none;
+    font-weight: 500;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-family: 'Alegreya Sans', sans-serif;
 }
 
 /*--------------
