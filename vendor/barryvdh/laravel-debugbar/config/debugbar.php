@@ -12,7 +12,7 @@ return array(
      |
      */
 
-    'enabled' => true,
+    'enabled' => null,
 
     /*
      |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ return array(
      |
      */
     'storage' => array(
-        'enabled' => false,
+        'enabled' => true,
         'driver' => 'file', // redis, file, pdo
         'path' => storage_path() . '/debugbar', // For file driver
         'connection' => null,   // Leave null for default connection (Redis/PDO)
@@ -89,7 +89,7 @@ return array(
         'files'           => false, // Show the included files
         'config'          => false, // Display config settings
         'auth'            => false, // Display Laravel authentication status
-        'session'         => false, // Display session data in a separate tab
+        'session'         => true,  // Display session data
     ),
 
     /*
