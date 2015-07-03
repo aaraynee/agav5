@@ -4,9 +4,6 @@
 
     <div id="playerDetail">
 
-        <div class="social"><div class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.usopen.com%2Fen_US%2Fplayers%2Fbios%2F24461.html" data-track="Player Bio||Thomas Aiken||Share||Facebook"><img src="/images/misc/share_fb.png" alt="Share on Facebook"></a></div><div class="twitter"><a href="https://twitter.com/share?url=http%3A%2F%2Fwww.usopen.com%2Fen_US%2Fplayers%2Fbios%2F24461.html&amp;via=usopengolf&amp;text=Thomas%20Aiken" data-track="Player Bio||Thomas Aiken||Share||Twitter"><img src="/images/misc/share_twitter.png" alt="Tweet"></a></div></div>
-
-<div class="fav"><a href="#"><span><img src="/images/misc/transparent.gif" width="16" height="10" alt="Favorite"></span><span class="label">Add to Favorites</span></a></div>
 
         <h1 class="header-name">{{$player->name}} {{$player->handicap()}}</h1>
 

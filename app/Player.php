@@ -31,7 +31,7 @@ class Player extends Model {
 
     public function getPhotoAttribute() {
         $lastname = strtolower($this->attributes['lastname']);
-        return HTML::image("img/players/default.png", "{$this->attributes['firstname']} {$this->attributes['lastname']}", ['width'=>"630px",'height'=>"385px"]);
+        return HTML::image("img/players/".strtolower($this->attributes['lastname']) . ".png", "{$this->attributes['firstname']} {$this->attributes['lastname']}", ['width'=>"630px",'height'=>"385px"]);
     }
 
     public function getFlagAttribute() {
