@@ -50,6 +50,8 @@ class Player extends Model {
     public function handicap($date = NULL) {
         if(!$date) {
             $date = date('Y-m-d');
+        } else {
+            $date = date('Y-m-d', strtotime($date));
         }
         $rounds =  $this->stats_array['all_rounds'];
 

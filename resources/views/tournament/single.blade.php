@@ -10,6 +10,32 @@
     .scoreboard tr:nth-child(even) {background: #f2f2f2}
     .scoreboard tr:nth-child(odd) {background: #f7f7f7}
 
+    .scoreboard span {
+        margin: 5px 0;
+
+}
+    .scoreboard span.name {
+        display:block;
+font-weight: 700;
+  font-size: 20px;}
+
+  .scoreboard span.country {
+      display:block;
+      font-size: 16px;
+  height: 20px;
+  line-height: 20px;
+  }
+
+  .scoreboard span.handicap {
+      display:block;
+      font-size: 16px;
+      background: #003865;
+      color: #ffffff;
+      padding: 4px 10px;
+  height: 20px;
+  line-height: 20px;
+  }
+
     .scorecard {font-weight: normal;
   font-size: 14px;
   border-left: 1px solid #e9e9e9;
@@ -62,7 +88,12 @@
                         <i class="uk-icon-minus-square-o uk-icon-justify uk-hidden" id="{{$round->id}}-minus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus'}"></i>
                 </tr>
                 <tr id="{{$round->id}}" class="uk-hidden">
-                    <td>{!!$round->player->photo!!}</td>
+                    <td>
+                        {!!$round->player->photo!!}
+                        <span class="name">{{$round->player->name}}</span>
+                        <span class="country">{{$round->player->country}}</span>
+                        <span class="handicap">Handicap {{$round->player->handicap($round->tournament->date)}}</span>
+                    </td>
                     <td colspan="7">
                         <table class="uk-table scorecard">
                             <tr>
@@ -129,7 +160,7 @@
                                 <td><span class="tplbogey"></span>Triple&nbsp;Bogey&nbsp;or&nbsp;worse</td>
 
                             </tr>
-                        </table>                        
+                        </table>
                     </td>
                 </tr>
             @endforeach
