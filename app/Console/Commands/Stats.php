@@ -100,10 +100,6 @@ class Stats extends Command {
                                 }
 
                                 foreach($this->distance as $distance_label => $pars) {
-                                    if($round->tournament->course->unit == 1) {
-                                        $course_scorecard['distance'][$hole] *= 0.9144;
-                                    }
-
                                     if($course_scorecard['distance'][$hole] <= $distance_label) {
                                         $temp['distance'][$time_label][$distance_label][$course_scorecard['par'][$hole]][] = $score;
                                     }

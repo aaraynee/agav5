@@ -21,10 +21,48 @@ class Round extends Model {
     }
 
     public function getScoreArrayAttribute() {
-      return explode(" ", $this->attributes['scorecard']);
+        return explode(" ", $this->attributes['scorecard']);
+    }
+
+    public function score($get = 'total') {
+        $scorecard = explode(" ", $this->attributes['scorecard']);
+
+        if($get == 'out') {
+            $scorecard = array_sum(array_slice($scorecard, 0,9));
+        }elseif($get == 'in') {
+            $scorecard = array_sum(array_slice($scorecard, 9,9));
+        }else {
+            $scorecard = array_sum(array_slice($scorecard, 0,18));
+        }
+
+        return $scorecard;
+    }
+
+    public function score_class() {
+        $classes = [
+            '-2' => 'eagle',
+            '-1' => 'birdie',
+            '0' => 'par',
+            '1' => 'bogey',
+            '2' => 'dblbogey',
+            '3' => 'tplbogey',
+        ];
+        $scorecard = explode(" ", $this->attributes['scorecard']);
+        for($i = 1; $i <= 18; $i++) {
+            $score = $scorecard[$i-1] - $this->tournament->course->scorecard_array['par'][$i];
+            if($score > 3) {
+                $score = 3;
+            }
+            $class_array[$i] = $classes[$score];
+        }
+      return $class_array;
     }
 
     public function getScoreboardAttribute() {
-      return (($this->attributes['adjusted'] == 0) ? "E" : $this->attributes['adjusted']);
+      return (($this->attributes['adjusted'] == 0) ? "E" : sprintf("%+d",$this->attributes['adjusted']));
+    }
+
+    public function getScoreboardTotalAttribute() {
+      return (($this->attributes['adjusted'] == 0) ? "E" : sprintf("%+d",$this->attributes['total']));
     }
 }

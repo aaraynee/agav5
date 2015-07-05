@@ -20,7 +20,12 @@ class Course extends Model {
         $i = 1;
         foreach($holes as $hole) {
             $hole_details = explode(" ", $hole);
-            $scorecard['distance'][$i] = $hole_details[0];
+
+            if($this->attributes['unit'] == 1) {
+                $hole_details[0] *= 0.9144;
+            }
+
+            $scorecard['distance'][$i] = floor($hole_details[0]);
             $scorecard['par'][$i] = $hole_details[1];
 
             $i++;
