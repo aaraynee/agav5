@@ -12,12 +12,12 @@ class TournamentController extends Controller {
 	}
 
 	public function all() {
-        $data['season'] = Season::current();        
+        $data['season'] = Season::current();
 		return view('tournament/all', $data);
 	}
-    
+
     public function single($slug) {
-        $data['tournament'] = Tournament::where('slug', $slug)->first();        
+        $data['tournament'] = Tournament::where('slug', $slug)->first();
 		return view('tournament/single', $data);
 	}
 }
