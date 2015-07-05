@@ -84,7 +84,7 @@ font-weight: 700;
                     <td>{{$round->scoreboard_total}}</td>
                     <td>{{$round->scoreboard}}</td>
                     <td>{{$round->points}}</td>
-                    <td><i class="uk-icon-plus-square-o uk-icon-justify" id="{{$round->id}}-plus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus'}"></i>
+                    <td><i class="uk-icon-plus-square-o uk-icon-justify" id="{{$round->id}}-plus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus',animation:'uk-animation-slide-left'}"></i>
                         <i class="uk-icon-minus-square-o uk-icon-justify uk-hidden" id="{{$round->id}}-minus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus'}"></i>
                 </tr>
                 <tr id="{{$round->id}}" class="uk-hidden">
