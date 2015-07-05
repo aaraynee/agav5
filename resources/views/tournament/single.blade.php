@@ -11,10 +11,10 @@
     .scoreboard tr:nth-child(odd) {background: #f7f7f7}
 
     .scorecard {font-weight: normal;
-  font-size: 16px;
+  font-size: 14px;
   border-left: 1px solid #e9e9e9;
   border-right: 1px solid #e9e9e9;}
-    .scorecard tr td {  height: 17px; line-height: 17px;}
+    /*.scorecard tr td {  height: 14px; line-height: 14px;}*/
     .scorecard tr.par td {border-top: 5px solid #c7c7c7;}
 
     .scorecard .eagle, .legend .eagle { background-color: #156399; color: #FFFFFF; }
@@ -23,6 +23,10 @@
     .scorecard .bogey, .legend .bogey { background-color: #F7B540; }
     .scorecard .dblbogey, .legend .dblbogey { background-color: #F55D00; color: #FFFFFF; }
     .scorecard .tplbogey, .legend .tplbogey { background-color: #A50D00; color: #FFFFFF; }
+
+    .scoreboard tr td img {
+        width: 200px;
+    }
 
 </style>
 
@@ -56,7 +60,8 @@
                         <i class="uk-icon-minus-square-o uk-icon-justify uk-hidden" id="{{$round->id}}-minus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus'}"></i>
                 </tr>
                 <tr id="{{$round->id}}" class="uk-hidden">
-                    <td colspan="8">
+                    <td>{!!$round->player->photo!!}</td>
+                    <td colspan="7">
                         <table class="uk-table scorecard">
                             <tr>
                                 <td>Hole</td>

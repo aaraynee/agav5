@@ -331,7 +331,7 @@ pre {
   border: 1px solid #dddddd;
   border-radius: 3px;
 }
-/* Selection pseudo-element 
+/* Selection pseudo-element
  ========================================================================== */
 ::-moz-selection {
   background: #3399ff;
@@ -7373,7 +7373,7 @@ a.uk-thumbnail:focus {
 /* Large screen and bigger */
 @media (min-width: 1220px) {
   .uk-container {
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 0 35px;
   }
 }
