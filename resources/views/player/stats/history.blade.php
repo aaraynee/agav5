@@ -41,7 +41,7 @@
                     <th>{{$par}}</th>
                     @endforeach
                 @endforeach
-            </tr> 
+            </tr>
             @foreach($player->stats_array['score_array']->distance as $time => $stats)
                 <tr>
                     <th>{{$time}}</th>
@@ -53,7 +53,7 @@
                                 @else
                                     -
                                 @endif
-                            </td>    
+                            </td>
                         @endforeach
                     @endforeach
                 </tr>

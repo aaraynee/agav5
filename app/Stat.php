@@ -21,13 +21,13 @@ class Stat extends Model {
         $table_order = [];
         $position_array = [];
 
-        $labels = ['points', 'position', 'last', 'top2', 'wins', 'played'];
+        $labels = ['rankings_points', 'rankings_position', 'rankings_last', 'rankings_top2', 'rankings_wins', 'rankings_played'];
 
         foreach($all_stats as $stat) {
-            if($stat->label == 'points') {
+            if($stat->label == 'rankings_points') {
                 $array = json_decode($stat->json);
                 $stats[$stat->player_id][$stat->label] = $array->total;
-            } elseif($stat->label == 'position') {
+            } elseif($stat->label == 'rankings_position') {
                 $array = json_decode($stat->json);
                 $stats[$stat->player_id][$stat->label] = $array->total;$position_array[$stat->player_id] = $array->total;
                 $stats[$stat->player_id]['last'] = ((isset($array->last)) ? $array->last : $array->total);
@@ -45,7 +45,7 @@ class Stat extends Model {
                 if($player_id == $player->id) {
                     $table_order[$i]['details'] = $player;
                     $table_order[$i]['stats'] = $stats[$player->id];
-                    $change = $stats[$player->id]['last'] - $stats[$player->id]['position'];
+                    $change = $stats[$player->id]['last'] - $stats[$player->id]['rankings_position'];
 
                     if($change > 0) {
                         $change = abs($change);

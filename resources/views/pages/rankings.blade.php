@@ -32,13 +32,13 @@
         <tbody>
             @foreach($standings->table() as $player)
                 <tr>
-                    <td>{{$player['stats']['position']}}</td>
+                    <td>{{$player['stats']['rankings_position']}}</td>
                     <td><span class="flag-icon flag-icon-{{$player['details']->country_code}}"></span></td>
                     <td class="player">{{$player['details']->firstname}} {{$player['details']->lastname}}</td>
-                    <td>{{$player['stats']['played']}}</td>
-                    <td>{{ ((isset($player['stats']['wins'])) ? $player['stats']['wins'] : '-' )}}</td>
-                    <td>{{ ((isset($player['stats']['top2'])) ? $player['stats']['top2'] : '-' )}}</td>
-                    <td>{{$player['stats']['points']}}</td>
+                    <td>{{$player['stats']['rankings_played']}}</td>
+                    <td>{{ ((isset($player['stats']['rankings_wins'])) ? $player['stats']['rankings_wins'] : '-' )}}</td>
+                    <td>{{ ((isset($player['stats']['rankings_top2'])) ? $player['stats']['rankings_top2'] : '-' )}}</td>
+                    <td>{{$player['stats']['rankings_points']}}</td>
                     <td>{!!$player['stats']['change']!!}</td>
                 </tr>
             @endforeach

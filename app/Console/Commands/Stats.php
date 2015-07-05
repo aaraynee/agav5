@@ -15,8 +15,7 @@ class Stats extends Command {
 	protected $description = 'Update all player stats';
 
     public $times = array(
-        'last month' => '-1 months',
-        'last 3 months' => '-3 months',
+        'last 2 months' => '-2 months',
         'last 6 months' => '-6 months',
         'all time' => '-10 years',
     );
@@ -61,7 +60,6 @@ class Stats extends Command {
             $score_array = array();
             $all_rounds = array();
 
-
             $stat_exists['rounds_played'] = FALSE;
             $stat_exists['courses_played'] = FALSE;
             $stat_exists['all_rounds'] = FALSE;
@@ -83,9 +81,9 @@ class Stats extends Command {
             }
 
             foreach($player->rounds as $round) {
+
                 if($round->holes_played == 18 && $round->tournament->scoring == 'stroke') {
                     $rounds_played++;
-                    debug(1);
                     $hole = 1;
                     $scorecard = array();
                     $course_scorecard = $round->tournament->course->scorecard_array;
@@ -98,18 +96,16 @@ class Stats extends Command {
                                     if($stat == $score - $course_scorecard['par'][$hole]
                                       || ($stat == 3 && ($score - $course_scorecard['par'][$hole]) > 3)) {
                                         $score_array['made'][$time_label][$made_label]++;
-                                        break;
                                     }
                                 }
-                                foreach($this->distance as $distance_label => $pars) {
 
+                                foreach($this->distance as $distance_label => $pars) {
                                     if($round->tournament->course->unit == 1) {
                                         $course_scorecard['distance'][$hole] *= 0.9144;
                                     }
 
                                     if($course_scorecard['distance'][$hole] <= $distance_label) {
                                         $temp['distance'][$time_label][$distance_label][$course_scorecard['par'][$hole]][] = $score;
-                                        break;
                                     }
                                 }
                             }
@@ -118,12 +114,11 @@ class Stats extends Command {
                     }
 
                     foreach($this->times as $time_label => $time) {
-
                         foreach($this->distance as $distance_label => $pars) {
                             foreach($pars as $par) {
                                 $total = $temp['distance'][$time_label][$distance_label][$par];
                                 if(count($total) > 0) {
-                                        $score_array['distance'][$time_label][$distance_label][$par] = sprintf("%0.1f",array_sum($total)/count($total));
+                                    $score_array['distance'][$time_label][$distance_label][$par] = sprintf("%0.1f",array_sum($total)/count($total));
                                 }
                             }
                         }
@@ -168,7 +163,7 @@ class Stats extends Command {
             if(!$stat_exists['rounds_played']) {
                 $stat = new Stat;
             }
-			
+
 			$stat->player_id = $player->id;
             $stat->label = 'rounds_played';
             $stat->json = json_encode($rounds_played);

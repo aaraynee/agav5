@@ -35,11 +35,11 @@ class Rankings extends Command {
             $this->info('------------');
 
 			$stats_array = [
-				'played' => 0,
-				'points' => ['total' => 0, 'last' => 0],
-				'wins' => 0,
-				'top2' => 0,
-				'points_history' => []
+				'rankings_played' => 0,
+				'rankings_points' => ['total' => 0, 'last' => 0],
+				'rankings_wins' => 0,
+				'rankings_top2' => 0,
+				'rankings_points_history' => []
 			];
 
             $history = array();
@@ -64,24 +64,24 @@ class Rankings extends Command {
 
 					$rating = intval(($multiplier/$round->position)*(10*$ratio));
 
-                    $stats_array['points']['total'] += $rating;
-                    $stats_array['points_history'][$round->tournament->date] = $stats_array['points']['total'];
-                    $stats_array['played']++;
+                    $stats_array['rankings_points']['total'] += $rating;
+                    $stats_array['rankings_points_history'][$round->tournament->date] = $stats_array['rankings_points']['total'];
+                    $stats_array['rankings_played']++;
 
                     if($round->position < 3) {
                         if($round->position == 1) {
-                            $stats_array['wins']++;
+                            $stats_array['rankings_wins']++;
                         }
-                        $stats_array['top2']++;
+                        $stats_array['rankings_top2']++;
                     }
                 }
             }
 
-            krsort($stats_array['points_history']);
+            krsort($stats_array['rankings_points_history']);
 
-            foreach($stats_array['points_history'] as $date => $total_points) {
+            foreach($stats_array['rankings_points_history'] as $date => $total_points) {
                 if(date('Y-m-d', strtotime($date)) < date('Y-m-d', strtotime('-1 month'))) {
-                    $stats_array['points']['last'] = $total_points;
+                    $stats_array['rankings_points']['last'] = $total_points;
                     break;
                 }
             }
@@ -100,8 +100,8 @@ class Rankings extends Command {
                 }
             }
 
-            $current[$player->id] = $stats_array['points']['total'];
-            $last[$player->id] = $stats_array['points']['last'];
+            $current[$player->id] = $stats_array['rankings_points']['total'];
+            $last[$player->id] = $stats_array['rankings_points']['last'];
         }
 
 
@@ -123,7 +123,7 @@ class Rankings extends Command {
 
             $last_points = $points;
 
-            $stats_array[$player_id]['position']['total'] = $position;
+            $stats_array[$player_id]['rankings_position']['total'] = $position;
         }
 
 
@@ -143,7 +143,7 @@ class Rankings extends Command {
 
             $last_points = $points;
 
-            $stats_array[$player_id]['position']['last'] = $position;
+            $stats_array[$player_id]['rankings_position']['last'] = $position;
         }
 
         foreach($stats_array as $player_id => $stats) {
