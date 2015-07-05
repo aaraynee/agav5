@@ -7,7 +7,7 @@ class Round extends Model {
     public $timestamps = false;
 
     protected $guarded = [];
-    
+
     public function tournament() {
         return $this->belongsTo('App\Tournament');
     }
@@ -24,4 +24,7 @@ class Round extends Model {
       return explode(" ", $this->attributes['scorecard']);
     }
 
+    public function getScoreboardAttribute() {
+      return (($this->attributes['adjusted'] == 0) ? "E" : $this->attributes['adjusted']);
+    }
 }
