@@ -17,16 +17,18 @@
     /*.scorecard tr td {  height: 14px; line-height: 14px;}*/
     .scorecard tr.par td {border-top: 5px solid #c7c7c7;}
 
-    .scorecard .eagle, .legend .eagle { background-color: #156399; color: #FFFFFF; }
-    .scorecard .birdie, .legend .birdie { background-color: #99D7E8; }
-    .scorecard .par, .legend .par { background-color: #FFFFFF; }
-    .scorecard .bogey, .legend .bogey { background-color: #F7B540; }
-    .scorecard .dblbogey, .legend .dblbogey { background-color: #F55D00; color: #FFFFFF; }
-    .scorecard .tplbogey, .legend .tplbogey { background-color: #A50D00; color: #FFFFFF; }
+    .scorecard .eagle, .eagle { background-color: #156399; color: #FFFFFF; }
+    .scorecard .birdie, .birdie { background-color: #99D7E8; }
+    .scorecard .par, .par { background-color: #FFFFFF; }
+    .scorecard .bogey, .bogey { background-color: #F7B540; }
+    .scorecard .dblbogey, .dblbogey { background-color: #F55D00; color: #FFFFFF; }
+    .scorecard .tplbogey, .tplbogey { background-color: #A50D00; color: #FFFFFF; }
 
     .scoreboard tr td img {
         width: 200px;
     }
+
+    .legend td span { float: left; width: 18px; height: 18px; margin-right: 10px; }
 
 </style>
 
@@ -112,6 +114,22 @@
                                 @endfor
                             </tr>
                         </table>
+                        <table class="uk-table legend">
+                            <tr>
+                                <td><span class="eagle"></span>Eagle&nbsp;or&nbsp;better</td>
+
+                                <td><span class="birdie"></span>Birdie</td>
+
+                                <td><span class="par"></span>Par</td>
+
+                                <td><span class="bogey"></span>Bogey</td>
+
+                                <td><span class="dblbogey"></span>Double&nbsp;Bogey</td>
+
+                                <td><span class="tplbogey"></span>Triple&nbsp;Bogey&nbsp;or&nbsp;worse</td>
+
+                            </tr>
+                        </table>                        
                     </td>
                 </tr>
             @endforeach
