@@ -58,7 +58,7 @@ class Rankings extends Command {
 					$date = new Carbon($round->tournament->date);
 					$now = new Carbon();
 
-					$multiplier = (($round->tournament->type == 'tour') ? 0.25 : 0.5);
+					$multiplier = (($round->tournament->type == 'tour') ? 0.5 : 0.25);
 
 					$ratio = ((8*30) - $date->diffInDays($now))/(8*30);
 
