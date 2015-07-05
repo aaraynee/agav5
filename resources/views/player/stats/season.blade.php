@@ -28,7 +28,7 @@
     .tabs-row.subnav .tab.selected a:before, .tabs-row.subnav .tab.selected a:after { background: none; width: 0; }
     .tabs-row.subnav .tab.selected .hidden { display: none; }
 
-    
+
 </style>
 <script>
     $(function(){
@@ -53,8 +53,8 @@
         },
         showYear: function(link) {
             var year = $(link).attr('data-id');
-            $('tr.season'+year).removeClass('uk-hidden');                    
-            $(link).parent('div.tab').addClass('selected');                    
+            $('tr.season'+year).removeClass('uk-hidden');
+            $(link).parent('div.tab').addClass('selected');
         }
     }
 </script>
@@ -82,10 +82,10 @@
                 <td>{{$round->tournament->name}}</td>
                 <td>{{$round->position}}</td>
                 <td>{{$round->score}}</td>
-                <td>{{$round->total}}</td>
-                <td>{{$round->adjusted}}</td>
+                <td>{{$round->scoreboard_total}}</td>
+                <td>{{$round->scoreboard}}</td>
                 <td>{{$round->points}}</td>
             </tr>
         @endforeach
-    </tbody>    
+    </tbody>
 </table>

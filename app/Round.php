@@ -24,7 +24,7 @@ class Round extends Model {
         return explode(" ", $this->attributes['scorecard']);
     }
 
-    public function score($get = 'total') {
+    public function get_score($get = 'total') {
         $scorecard = explode(" ", $this->attributes['scorecard']);
 
         if($get == 'out') {

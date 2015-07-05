@@ -137,10 +137,10 @@ font-weight: 700;
                                 @for($i =1;$i<=18;$i++)
                                     <td class="{{$round->score_class()[$i]}}">{{$round->score_array[$i-1]}}</td>
                                     @if($i == 9)
-                                        <td>{{$round->score('out')}}</td>
+                                        <td>{{$round->get_score('out')}}</td>
                                     @elseif($i == 18)
-                                        <td>{{$round->score('in')}}</td>
-                                        <td>{{$round->score('total')}}</td>
+                                        <td>{{$round->get_score('in')}}</td>
+                                        <td>{{$round->get_score('total')}}</td>
                                     @endif
                                 @endfor
                             </tr>
