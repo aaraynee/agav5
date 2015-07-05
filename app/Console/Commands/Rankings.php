@@ -50,7 +50,12 @@ class Rankings extends Command {
 					&& ($round->tournament->type == 'tour'
                     || $round->tournament->type == 'exhibition')
                   ) {
-
+					$total_players = 0;
+					$handicap_total = 0;
+					foreach($round->tournament->rounds as $round1) {
+						$handicap_total += $round1->player->handicap($round->tournament->date);
+						$total_players++;
+					}
                     if(!$round->points) {
                         $round->points = 0;
                     }
@@ -58,11 +63,12 @@ class Rankings extends Command {
 					$date = new Carbon($round->tournament->date);
 					$now = new Carbon();
 
-					$multiplier = (($round->tournament->type == 'tour') ? 0.5 : 0.25);
+					$a = ($total_players/$round->position);
+					$b = 36.4 / ($handicap_total/$total_players);
+					$c = (10*(((8*30) - $date->diffInDays($now))/(8*30)));
+					$d = (($round->tournament->type == 'tour') ? 10 : 1);
 
-					$ratio = ((8*30) - $date->diffInDays($now))/(8*30);
-
-					$rating = intval(($multiplier/$round->position)*(10*$ratio));
+					$rating = intval($a * $b * $c * $d);
 
                     $stats_array['rankings_points']['total'] += $rating;
                     $stats_array['rankings_points_history'][$round->tournament->date] = $stats_array['rankings_points']['total'];
@@ -78,16 +84,31 @@ class Rankings extends Command {
             }
 
             krsort($stats_array['rankings_points_history']);
-
+			$minus = 0;
             foreach($stats_array['rankings_points_history'] as $date => $total_points) {
+				$minus++;
                 if(date('Y-m-d', strtotime($date)) < date('Y-m-d', strtotime('-1 month'))) {
                     $stats_array['rankings_points']['last'] = $total_points;
                     break;
                 }
             }
 
-            foreach($stats_array as $stat => $value) {
+			$average = $stats_array['rankings_played'];
+			if($average > 30) {
+				$average = 30;
+			}elseif($average <= 0) {
+				$average = 1;
+			}
+			$average_last = $stats_array['rankings_played'] - $minus;
+			if($average_last > 30) {
+				$average_last = 30;
+			}elseif($average_last <= 0) {
+				$average_last = 1;
+			}
+            $current[$player->id] = $stats_array['rankings_points']['total'] = intval($stats_array['rankings_points']['total']/$average);
+            $last[$player->id] = $stats_array['rankings_points']['last'] = intval($stats_array['rankings_points']['last']/$average_last);
 
+            foreach($stats_array as $stat => $value) {
                 if(!empty($value)) {
                     $details = [
                         'label' => $stat,
@@ -99,9 +120,6 @@ class Rankings extends Command {
                     $details = array();
                 }
             }
-
-            $current[$player->id] = $stats_array['rankings_points']['total'];
-            $last[$player->id] = $stats_array['rankings_points']['last'];
         }
 
 
