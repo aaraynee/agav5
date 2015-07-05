@@ -35,8 +35,7 @@ class Player extends Model {
     }
 
     public function getFlagAttribute() {
-        $country = strtolower($this->attributes['country']);
-        return HTML::image("img/flags/{$country}.gif");
+        return "<span class='flag-icon flag-icon-{$this->attributes['country_code']}'></span>";
     }
 
     public function getStatsArrayAttribute() {

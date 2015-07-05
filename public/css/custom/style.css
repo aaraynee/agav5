@@ -8,12 +8,11 @@ body {
     font-family: "Alegreya Sans", sans-serif;
 }
 
-.uk-container {
-    width: 1000px;
-}
-
 .page-content {
-    background: #ffffff;
+    background-color: #f6f6f6;
+    position: relative;
+    min-height: 400px;
+    border: solid 1px #FFFFFF;
 }
 
 /*--------------

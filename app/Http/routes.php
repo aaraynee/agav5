@@ -18,8 +18,6 @@ Route::get('contact', 'PagesController@contact');
 
 Route::get('rankings', 'PagesController@rankings');
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Player Routes

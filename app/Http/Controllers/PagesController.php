@@ -8,12 +8,12 @@ class PagesController extends Controller {
 	{
 		return view('home');
 	}
-    
+
 	public function rankings()
 	{
         $data['rankings'] = Stat::first();        
 		return view('pages/rankings', $data);
 	}
-    
+
 
 }

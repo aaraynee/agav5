@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -14,11 +14,11 @@ class SeasonController extends Controller {
         $data['seasons'] = Season::all();
 		return view('season/all', $data);
 	}
-    
+
     public function single($slug) {
         $season = Season::where('slug', $slug)->first();
-        $data['season'] = $season;                
-        $data['players'] = $season->players();
+        $data['season'] = $season;
+        $data['standings'] = $season->players();
 		return view('season/single', $data);
 	}
 }
