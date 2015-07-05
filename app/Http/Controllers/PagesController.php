@@ -11,7 +11,7 @@ class PagesController extends Controller {
 
 	public function rankings()
 	{
-        $data['rankings'] = Stat::first();        
+        $data['standings'] = Stat::first();        
 		return view('pages/rankings', $data);
 	}
 

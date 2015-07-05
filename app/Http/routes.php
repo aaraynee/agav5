@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -52,3 +51,6 @@ Route::get('tournament/{slug}', ['uses' => 'TournamentController@single', 'as' =
 */
 Route::get('courses', 'CourseController@all');
 Route::get('course/{slug}', ['uses' => 'CourseController@single', 'as' => 'course']);
+
+
+Route::get('{slug}', ['uses' => 'SeasonController@single', 'as' => 'season']);
