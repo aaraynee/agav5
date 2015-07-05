@@ -3,13 +3,15 @@
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model {
-    
+
     public $timestamps = false;
+
+    protected $guarded = [];
 
     public function tournament() {
         return $this->hasOne('App\Tournament');
-    }   
-    
+    }
+
     public function getScorecardArrayAttribute() {
         $holes = explode("|", $this->attributes['scorecard']);
         if(count($holes) == 9) {
@@ -20,10 +22,10 @@ class Course extends Model {
             $hole_details = explode(" ", $hole);
             $scorecard['distance'][$i] = $hole_details[0];
             $scorecard['par'][$i] = $hole_details[1];
-                
+
             $i++;
         }
       return $scorecard;
-    }    
+    }
 
 }

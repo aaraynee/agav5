@@ -21,8 +21,9 @@ class Season extends Model {
     }
 
     public function players() {
-        $stats = array();
-        $table_order = array();
+        $stats = [];
+        $table_order = [];
+        $position_array = [];
 
         $labels = ['points', 'position', 'last', 'top2', 'wins', 'played'];
 

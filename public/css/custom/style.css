@@ -10,17 +10,59 @@ body {
 
 .page-content {
     background-color: #f6f6f6;
-    position: relative;
     min-height: 400px;
     border: solid 1px #FFFFFF;
+}
+
+.main-content {
+    padding: 20px 10px;
+}
+
+.sponsors {
+    text-align: center;
+    height: 160px;
+    background: #ffffff;
+}
+
+.footer-links {
+    height: 70px;
+    line-height: 62px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    display: inline-block;
+    float: left;
+    padding: 0px 20px;
+}
+
+.footer-links ul li a {
+    color: #003865;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.copyright {
+    height: 90px;
+    background: #d8d8d8;
+}
+
+.copyright .info {
+    text-align: center;
+    color: #59595b;
+    font-size: 14px;
+    padding-top: 30px;
 }
 
 /*--------------
 -   PLAYERS
 --------------*/
 
-li.player img { width: 20px; margin: 10px 10px; }
-li.player a { color: #005391; text-decoration: none; font-weight: 400; }
 
 /*--------------
 -   PLAYER

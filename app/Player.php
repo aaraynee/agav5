@@ -8,6 +8,8 @@ class Player extends Model {
 
     public $timestamps = false;
 
+    protected $guarded = [];
+
     public function rounds() {
         return $this->hasMany('App\Round');
     }

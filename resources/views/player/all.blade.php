@@ -3,8 +3,9 @@
 <style>
     .player-tile {
         background: #ffffff;
-        height: 216px;
-        width: 216px;
+        height: 190px;
+        width: 95%;
+        margin: 0 auto;
     }
 
     .player-tile .title {
@@ -16,8 +17,8 @@
         display: block;
     }
     .player-tile a img {
-        width: 216px;
-        height: 133px;
+        width: 100%;
+        height: 115px;
     }
 
     .player-tile .country {

@@ -8,7 +8,7 @@ class Stat extends Model {
 
     public $timestamps = false;
 
-    protected $fillable = ['label', 'player_id', 'season_id', 'json'];
+    protected $guarded = [];
 
     public function player() {
         return $this->belongsTo('App\Player');

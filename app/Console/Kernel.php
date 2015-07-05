@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel {
 		'App\Console\Commands\Inspire',
 		'App\Console\Commands\Stats',
 		'App\Console\Commands\Seasons',
+		'App\Console\Commands\Port',
 	];
 
 	/**

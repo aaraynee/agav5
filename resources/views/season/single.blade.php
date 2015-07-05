@@ -13,7 +13,9 @@
         .standings tr:nth-child(odd) {background: #f7f7f7}
     </style>
 
-    <h1>{{$season->name}}</h1>
+    <div class="main-content">
+            <h1>{{$season->name}} Rankings</h1>
+    </div>
     <table callpadding="0" cellspacing="0" class="uk-table standings">
         <thead>
             <tr>
