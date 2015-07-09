@@ -65,7 +65,7 @@ class Rankings extends Command {
 
 					$a = ($total_players/$round->position);
 					$b = 36.4 / ($handicap_total/$total_players);
-					$c = (10*(((8*30) - $date->diffInDays($now))/(8*30)));
+					$c = (10*((((8*30)+1) - $date->diffInDays($now))/(8*30)));
 					$d = (($round->tournament->type == 'tour') ? 10 : 1);
 
 					$rating = intval($a * $b * $c * $d);
