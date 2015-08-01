@@ -57,6 +57,7 @@ class Seasons extends Command {
                     if($round->holes_played == 18
                         && $round->tournament->scoring == 'stroke'
                         && $round->tournament->type == 'tour'
+                        && !$round->tournament->reset
                         && $round->tournament->season_id == $season->id
                       ) {
 
