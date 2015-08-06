@@ -27,16 +27,33 @@ class Season extends Model {
 
         $labels = ['points', 'position', 'last', 'top2', 'wins', 'played'];
 
-        foreach($this->stats as $stat) {
-            if($stat->label == 'points') {
-                $array = json_decode($stat->json);
-                $stats[$stat->player_id][$stat->label] = $array->total;
-            } elseif($stat->label == 'position') {
-                $array = json_decode($stat->json);
-                $stats[$stat->player_id][$stat->label] = $array->total;$position_array[$stat->player_id] = $array->total;
-                $stats[$stat->player_id]['last'] = $array->last;
-            } elseif($stat->label != 'last') {
-                $stats[$stat->player_id][$stat->label] = $stat->json;
+        if(date('Y-m-d') > $this->end_date) {
+            foreach ($this->stats as $stat) {
+                if ($stat->label == 'reset') {
+                    $array = json_decode($stat->json);
+                    $stats[$stat->player_id]['points'] = $array->points;
+                    $stats[$stat->player_id]['position'] = $array->position;
+                    $position_array[$stat->player_id] = $array->position;
+                } elseif ($stat->label == 'position') {
+                    $array = json_decode($stat->json);
+                    $stats[$stat->player_id]['last'] = $array->last;
+                } elseif ($stat->label != 'last') {
+                    $stats[$stat->player_id][$stat->label] = $stat->json;
+                }
+            }
+        } else {
+            foreach ($this->stats as $stat) {
+                if ($stat->label == 'points') {
+                    $array = json_decode($stat->json);
+                    $stats[$stat->player_id][$stat->label] = $array->total;
+                } elseif ($stat->label == 'position') {
+                    $array = json_decode($stat->json);
+                    $stats[$stat->player_id][$stat->label] = $array->total;
+                    $position_array[$stat->player_id] = $array->total;
+                    $stats[$stat->player_id]['last'] = $array->last;
+                } elseif ($stat->label != 'last') {
+                    $stats[$stat->player_id][$stat->label] = $stat->json;
+                }
             }
         }
 
