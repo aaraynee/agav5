@@ -39,10 +39,6 @@ class Seasons extends Command {
 		}
 
         foreach($players as $player) {
-            $this->info('------------');
-            $this->info($player->name);
-            $this->info('------------');
-
             foreach($seasons as $season) {
                 $stats_array = [
                     'played' => 0,
@@ -51,21 +47,26 @@ class Seasons extends Command {
                     'top2' => 0,
                     'points_history' => []
                 ];
+                $reset[$season->id][$player->id] = 0;
 
                 $history = array();
                 foreach($player->rounds as $round) {
                     if($round->holes_played == 18
                         && $round->tournament->scoring == 'stroke'
                         && $round->tournament->type == 'tour'
-                        && !$round->tournament->reset
                         && $round->tournament->season_id == $season->id
                       ) {
 
                         if(!$round->points) {
                             $round->points = 0;
                         }
-                        $stats_array['points']['total'] += $round->points;
-                        $stats_array['points_history'][$round->tournament->date] = $stats_array['points']['total'];
+
+                        if(!$round->tournament->reset) {
+                            $stats_array['points']['total'] += $round->points;
+                            $stats_array['points_history'][$round->tournament->date] = $stats_array['points']['total'];
+                        } else {
+                            $reset[$season->id][$player->id] = $round->points;
+                        }
                         $stats_array['played']++;
 
                         if($round->position < 3) {
@@ -117,6 +118,8 @@ class Seasons extends Command {
             $last_points = -9999;
             $draw = array_count_values($current[$season->id]);
 
+            $reset_points_array = array(0,2500,2000,1500,1000,750,500,250,125,100,90,80,70);
+
             foreach($current[$season->id] as $player_id => $points) {
                 if($position == 0) {
                     $position++;
@@ -126,6 +129,7 @@ class Seasons extends Command {
 
                 $last_points = $points;
 
+                $reset_array[$player_id] = $reset[$season->id][$player_id] + $reset_points_array[$position];
                 $stats_array[$player_id]['position']['total'] = $position;
             }
 
@@ -164,6 +168,46 @@ class Seasons extends Command {
                     }
                 }
             }
+
+
+            /* RESET */
+            $stats_array = [];
+            arsort($reset_array);
+
+            $position = 0;
+            $last_points = -9999;
+            $draw = array_count_values($reset_array);
+
+            foreach($reset_array as $player_id => $points) {
+                if($position == 0) {
+                    $position++;
+                } elseif($points != $last_points) {
+                    $position += $draw[$points];
+                }
+
+                $last_points = $points;
+
+                $stats_array[$player_id]['reset']['points'] = $points;
+                $stats_array[$player_id]['reset']['position'] = $position;
+            }
+
+            foreach($stats_array as $player_id => $stats) {
+                foreach($stats as $stat => $value) {
+                    if(!empty($value)) {
+                        $details = [
+                            'label' => $stat,
+                            'player_id' => $player_id,
+                            'season_id' => $season->id,
+                        ];
+                        $update = Stat::firstOrCreate($details);
+                        $update->json = json_encode($value);
+                        $update->save();
+                        $details = array();
+                    }
+                }
+            }
+
+
         }
 	}
 }
