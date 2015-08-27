@@ -16,8 +16,8 @@ class Season extends Model {
     }
 
     public function scopeCurrent($query) {
-        $year = date('Y');
-        return $query->where('year', $year)->first();
+        //$year = date('Y');
+        return $query->orderBy('year', 'desc')->first();
     }
 
     public function players() {

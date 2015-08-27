@@ -25,7 +25,6 @@ class Tournament extends Model {
     }
 
     public function defending_champion() {
-
         $champs = [];
         foreach($this->rounds as $round) {
             if($round->position == 1) {
@@ -49,6 +48,10 @@ class Tournament extends Model {
                     break;
                 }
             }
+        }
+
+        if(empty($champs)) {
+            return NULL;
         }
 
         $defending_champion = implode(",", $champs);
