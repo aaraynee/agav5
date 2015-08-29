@@ -48,7 +48,7 @@ class Round extends Model {
             '3' => 'tplbogey',
         ];
         $scorecard = explode(" ", $this->attributes['scorecard']);
-        for($i = 1; $i <= 18; $i++) {
+        for($i = 1; $i <= $this->holes_played; $i++) {
             $score = $scorecard[$i-1] - $this->tournament->course->scorecard_array['par'][$i];
             if($score > 3) {
                 $score = 3;
