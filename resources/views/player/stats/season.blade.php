@@ -30,6 +30,63 @@
 
 
 </style>
+
+<style>
+    .scoreboard {font-size: 18px; margin:0 padding:0;}
+    .scoreboard thead tr td { background: #F0F0F0; color: #000000; font-size: 15px; padding: 10px 0px; text-transform: uppercase; font-weight: 700; text-align: center;}
+    .scoreboard tbody tr td { text-align: center; height: 30px; vertical-align: middle; border-bottom: 1px solid #e9e9e9; border-left: 1px solid #e9e9e9; }
+    .scoreboard .player { text-align:left; }
+    .scoreboard tr:nth-child(even) {background: #f2f2f2}
+    .scoreboard tr:nth-child(odd) {background: #f7f7f7}
+
+    .scoreboard span {
+        margin: 5px 0;
+
+    }
+    .scoreboard span.name {
+        display:block;
+        font-weight: 700;
+        font-size: 20px;}
+
+    .scoreboard span.country {
+        display:block;
+        font-size: 16px;
+        height: 20px;
+        line-height: 20px;
+    }
+
+    .scoreboard span.handicap {
+        display:block;
+        font-size: 16px;
+        background: #003865;
+        color: #ffffff;
+        padding: 4px 10px;
+        height: 20px;
+        line-height: 20px;
+    }
+
+    .scorecard {font-weight: normal;
+        font-size: 14px;
+        border-left: 1px solid #e9e9e9;
+        border-right: 1px solid #e9e9e9;}
+    /*.scorecard tr td {  height: 14px; line-height: 14px;}*/
+    .scorecard tr.par td {border-top: 5px solid #c7c7c7;}
+
+    .scorecard .eagle, .eagle { background-color: #156399; color: #FFFFFF; }
+    .scorecard .birdie, .birdie { background-color: #99D7E8; }
+    .scorecard .par, .par { background-color: #FFFFFF; }
+    .scorecard .bogey, .bogey { background-color: #F7B540; }
+    .scorecard .dblbogey, .dblbogey { background-color: #F55D00; color: #FFFFFF; }
+    .scorecard .tplbogey, .tplbogey { background-color: #A50D00; color: #FFFFFF; }
+
+    .scoreboard tr td img {
+        width: 200px;
+    }
+
+    .legend td span { float: left; width: 18px; height: 18px; margin-right: 10px; }
+
+</style>
+
 <script>
     $(function(){
         Dashboard.init();
