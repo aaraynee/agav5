@@ -91,12 +91,6 @@
                 </td>
             </tr>
             <tr id="{{$round->id}}" class="uk-hidden">
-                <td>
-                    {!!$round->player->photo!!}
-                    <span class="name">{{$round->player->name}}</span>
-                    <span class="country">{{$round->player->country}}</span>
-                    <span class="handicap">Handicap {{$round->player->handicap($round->tournament->date)}}</span>
-                </td>
                 <td colspan="7">
                     <table class="uk-table scorecard">
                         <tr>
