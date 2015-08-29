@@ -112,6 +112,7 @@
             var year = $(link).attr('data-id');
             $('tr.season'+year).removeClass('uk-hidden');
             $(link).parent('div.tab').addClass('selected');
+            $('tr.round').addClass('uk-hidden');
         }
     }
 </script>
@@ -147,7 +148,7 @@
                     <i class="uk-icon-minus-square-o uk-icon-justify uk-hidden" id="{{$round->id}}-minus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus'}"></i>
                 </td>
             </tr>
-            <tr id="{{$round->id}}" class="uk-hidden">
+            <tr id="{{$round->id}} round" class="uk-hidden">
                 <td colspan="7">
                     <table class="uk-table scorecard">
                         <tr>
