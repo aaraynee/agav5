@@ -70,7 +70,6 @@
         <tr>
             <th></th>
             <th>Position</th>
-            <th>Score</th>
             <th>Total</th>
             <th>Adjusted</th>
             <th>Points</th>
@@ -79,9 +78,9 @@
     <tbody>
         @foreach($player->rounds as $round)
             <tr class="tournament season{{$round->tournament->season_id}}">
+                <td>{{$round->tournament->short_date}}</td>
                 <td>{{$round->tournament->name}}</td>
                 <td>{{$round->position}}</td>
-                <td>{{$round->score}}</td>
                 <td>{{$round->scoreboard_total}}</td>
                 <td>{{$round->scoreboard}}</td>
                 <td>{{$round->points}}</td>

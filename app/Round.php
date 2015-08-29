@@ -59,10 +59,10 @@ class Round extends Model {
     }
 
     public function getScoreboardAttribute() {
-      return (($this->attributes['adjusted'] == 0) ? "E" : sprintf("%+d",$this->attributes['adjusted']));
+      return (isset($this->attributes['adjusted']) ? (($this->attributes['adjusted'] == 0) ? "E" : sprintf("%+d",$this->attributes['adjusted'])) : sprintf("%+d",$this->attributes['total']));
     }
 
     public function getScoreboardTotalAttribute() {
-      return (($this->attributes['adjusted'] == 0) ? "E" : sprintf("%+d",$this->attributes['total']));
+      return (($this->attributes['total'] == 0) ? "E" : sprintf("%+d",$this->attributes['total']));
     }
 }
