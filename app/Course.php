@@ -33,4 +33,8 @@ class Course extends Model {
       return $scorecard;
     }
 
+    public function getAgaRatingAttribute() {
+        return round((40/$this->attributes['course_layout']) + (40/$this->attributes['course_conditions']) + (5/$this->attributes['clubhouse']) + (15/$this->attributes['green_fees']),  1);
+    }
+
 }
