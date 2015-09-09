@@ -5,7 +5,7 @@
     <div id="playerDetail">
 
 
-        <h1 class="header-name">{{$player->name}} {{$player->handicap()}}</h1>
+        <h1 class="header-name">{{$player->name}} {{$player->handicap}}</h1>
 
         <div class="player">
             {!!$player->flag!!}

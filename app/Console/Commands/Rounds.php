@@ -45,6 +45,10 @@ class Rounds extends Command {
                 $i++;
             }
 
+
+            $player->handicap = $this->handicap($player->id);
+            $player->save();
+
         }
     }
 
