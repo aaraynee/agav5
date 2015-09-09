@@ -46,7 +46,7 @@
         @foreach ($players as $player)
             <li class="uk-width-medium-1-4">
                 <div class="player-tile">
-                    <div class="title">{{ $player->name }}</div>
+                    <div class="title">{{ $player->name }} ({{ $player->handicap }})</div>
                     <a href="{{route('player', $player->slug)}}">
                         {!!$player->photo!!}
                     </a>

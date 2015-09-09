@@ -61,110 +61,142 @@ font-weight: 700;
     <h1>{{$tournament->name}}</h1>
     <a href="{{route('course', $tournament->course->slug)}}">{{$tournament->course->name}}</a>
 
-    <table class="uk-table scoreboard">
-        <thead>
-            <tr>
-                <td>Pos</td>
-                <td>Country</td>
-                <td class="player">Player</td>
-                <td>Strokes</td>
-                <td>Total</td>
-                <td>Adjusted</td>
-                <td>Points</td>
-                <td></td>
-            </tr>
-        </tdead>
-        <tbody>
-            @foreach ($tournament->rounds as $round)
+
+    @if($tournament->scoring == 'stroke')
+
+        <table class="uk-table scoreboard">
+            <thead>
                 <tr>
-                    <td>{{$round->position}}</td>
-                    <td>{!!$round->player->flag!!}</td>
-                    <td class="player">{{$round->player->name}}</td>
-                    <td>{{$round->strokes}}</td>
-                    <td>{{$round->scoreboard_total}}</td>
-                    <td>{{$round->scoreboard}}</td>
-                    <td>{{$round->points}}</td>
-                    <td><i class="uk-icon-plus-square-o uk-icon-justify" id="{{$round->id}}-plus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus',animation:'uk-animation-slide-left'}"></i>
-                        <i class="uk-icon-minus-square-o uk-icon-justify uk-hidden" id="{{$round->id}}-minus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus'}"></i>
-                    </td>
+                    <td>Pos</td>
+                    <td>Country</td>
+                    <td class="player">Player</td>
+                    <td>Strokes</td>
+                    <td>Total</td>
+                    <td>Adjusted</td>
+                    <td>Points</td>
+                    <td></td>
                 </tr>
-                <tr id="{{$round->id}}" class="uk-hidden">
-                    <td>
-                        {!!$round->player->photo!!}
-                        <span class="name">{{$round->player->name}}</span>
-                        <span class="country">{{$round->player->country}}</span>
-                        <span class="handicap">Handicap {{$round->player->handicap($round->tournament->date)}}</span>
-                    </td>
-                    <td colspan="7">
-                        <table class="uk-table scorecard">
-                            <tr>
-                                <td>Hole</td>
-                                @for($i =1;$i<=18;$i++)
-                                    <td>{{$i}}</td>
-                                    @if($i == 9)
-                                        <td>OUT</td>
-                                    @elseif($i == 18)
-                                        <td>IN</td>
-                                        <td>TOTAL</td>
-                                    @endif
-                                @endfor
-                            </tr>
-                            <tr class="par">
-                                <td>Par</td>
-                                @for($i =1;$i<=18;$i++)
-                                    <td>{{$round->tournament->course->scorecard_array['par'][$i]}}</td>
-                                    @if($i == 9)
-                                        <td>OUT</td>
-                                    @elseif($i == 18)
-                                        <td>IN</td>
-                                        <td>TOTAL</td>
-                                    @endif
-                                @endfor
-                            </tr>
-                            <tr>
-                                <td>Metres</td>
-                                @for($i =1;$i<=18;$i++)
-                                    <td>{{$round->tournament->course->scorecard_array['distance'][$i]}}</td>
-                                    @if($i == 9)
-                                        <td>OUT</td>
-                                    @elseif($i == 18)
-                                        <td>IN</td>
-                                        <td>TOTAL</td>
-                                    @endif
-                                @endfor
-                            </tr>
-                            <tr>
-                                <td>Score</td>
-                                @for($i =1;$i<=18;$i++)
-                                    <td class="{{$round->score_class()[$i]}}">{{$round->score_array[$i-1]}}</td>
-                                    @if($i == 9)
-                                        <td>{{$round->get_score('out')}}</td>
-                                    @elseif($i == 18)
-                                        <td>{{$round->get_score('in')}}</td>
-                                        <td>{{$round->get_score('total')}}</td>
-                                    @endif
-                                @endfor
-                            </tr>
-                        </table>
-                        <table class="uk-table legend">
-                            <tr>
-                                <td><span class="eagle"></span>Eagle&nbsp;or&nbsp;better</td>
+            </tdead>
+            <tbody>
+                @foreach ($tournament->rounds as $round)
+                    <tr>
+                        <td>{{$round->position}}</td>
+                        <td>{!!$round->player->flag!!}</td>
+                        <td class="player">{{$round->player->name}}</td>
+                        <td>{{$round->strokes}}</td>
+                        <td>{{$round->scoreboard_total}}</td>
+                        <td>{{$round->scoreboard}}</td>
+                        <td>{{$round->points}}</td>
+                        <td><i class="uk-icon-plus-square-o uk-icon-justify" id="{{$round->id}}-plus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus',animation:'uk-animation-slide-left'}"></i>
+                            <i class="uk-icon-minus-square-o uk-icon-justify uk-hidden" id="{{$round->id}}-minus" data-uk-toggle="{target:'#{{$round->id}}, #{{$round->id}}-plus, #{{$round->id}}-minus'}"></i>
+                        </td>
+                    </tr>
+                    <tr id="{{$round->id}}" class="uk-hidden">
+                        <td>
+                            {!!$round->player->photo!!}
+                            <span class="name">{{$round->player->name}}</span>
+                            <span class="country">{{$round->player->country}}</span>
+                            <span class="handicap">Handicap {{$round->player->handicap}}</span>
+                        </td>
+                        <td colspan="7">
+                            <table class="uk-table scorecard">
+                                <tr>
+                                    <td>Hole</td>
+                                    @for($i =1;$i<=18;$i++)
+                                        <td>{{$i}}</td>
+                                        @if($i == 9)
+                                            <td>OUT</td>
+                                        @elseif($i == 18)
+                                            <td>IN</td>
+                                            <td>TOTAL</td>
+                                        @endif
+                                    @endfor
+                                </tr>
+                                <tr class="par">
+                                    <td>Par</td>
+                                    @for($i =1;$i<=18;$i++)
+                                        <td>{{$round->tournament->course->scorecard_array['par'][$i]}}</td>
+                                        @if($i == 9)
+                                            <td>OUT</td>
+                                        @elseif($i == 18)
+                                            <td>IN</td>
+                                            <td>TOTAL</td>
+                                        @endif
+                                    @endfor
+                                </tr>
+                                <tr>
+                                    <td>Metres</td>
+                                    @for($i =1;$i<=18;$i++)
+                                        <td>{{$round->tournament->course->scorecard_array['distance'][$i]}}</td>
+                                        @if($i == 9)
+                                            <td>OUT</td>
+                                        @elseif($i == 18)
+                                            <td>IN</td>
+                                            <td>TOTAL</td>
+                                        @endif
+                                    @endfor
+                                </tr>
+                                <tr>
+                                    <td>Score</td>
+                                    @for($i =1;$i<=18;$i++)
+                                        <td class="{{$round->score_class()[$i]}}">{{$round->score_array[$i-1]}}</td>
+                                        @if($i == 9)
+                                            <td>{{$round->get_score('out')}}</td>
+                                        @elseif($i == 18)
+                                            <td>{{$round->get_score('in')}}</td>
+                                            <td>{{$round->get_score('total')}}</td>
+                                        @endif
+                                    @endfor
+                                </tr>
+                            </table>
+                            <table class="uk-table legend">
+                                <tr>
+                                    <td><span class="eagle"></span>Eagle&nbsp;or&nbsp;better</td>
 
-                                <td><span class="birdie"></span>Birdie</td>
+                                    <td><span class="birdie"></span>Birdie</td>
 
-                                <td><span class="par"></span>Par</td>
+                                    <td><span class="par"></span>Par</td>
 
-                                <td><span class="bogey"></span>Bogey</td>
+                                    <td><span class="bogey"></span>Bogey</td>
 
-                                <td><span class="dblbogey"></span>Double&nbsp;Bogey</td>
+                                    <td><span class="dblbogey"></span>Double&nbsp;Bogey</td>
 
-                                <td><span class="tplbogey"></span>Triple&nbsp;Bogey&nbsp;or&nbsp;worse</td>
+                                    <td><span class="tplbogey"></span>Triple&nbsp;Bogey&nbsp;or&nbsp;worse</td>
 
-                            </tr>
-                        </table>
-                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @elseif($tournament->scoring == 'cup')
+
+        <style>
+            .cup tr td { text-align:center; }
+
+        </style>
+
+        <table class="uk-table cup">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            @foreach($tournament->matchups as $matchup)
+                <tr>
+                    <td>{{ $matchup->player1->name }}</td>
+                    <td>-</td>
+                    <td>{{ ceil((($matchup->player1->handicap * ($tournament->course->slope_rating / 113)) - ($matchup->player2->handicap * ($tournament->course->slope_rating / 113))) / 2) }}</td>
+                    <td>-</td>
+                    <td>{{ $matchup->player2->name }}</td>
                 </tr>
             @endforeach
-        </tbody>
-    </table>
+        </table>
+
+    @endif
 @stop

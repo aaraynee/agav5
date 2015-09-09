@@ -20,6 +20,10 @@ class Tournament extends Model {
         return $this->hasMany('App\Round')->orderBy('position', 'asc');
     }
 
+    public function matchups() {
+        return $this->hasMany('App\Matchup')->orderBy('round', 'asc');
+    }
+
     public function getShortDateAttribute() {
       return date('d-M', strtotime($this->attributes['date']));
     }
