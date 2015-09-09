@@ -36,7 +36,7 @@ class Tournaments extends Command {
 
                 $i = 1;
                 foreach ($tournament->rounds as $round) {
-                    if(empty($round->adjusted)) {
+                    if(isset($round->adjusted)) {
                         $score = $round->strokes;
                     } else {
                         $score = $round->adjusted;
@@ -95,7 +95,7 @@ class Tournaments extends Command {
 
                     $round = Round::find($round_id);
 
-                    if(empty($round->adjusted)) {
+                    if(isset($round->adjusted)) {
                         $score = $round->strokes;
                     } else {
                         $score = $round->adjusted;
