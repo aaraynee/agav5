@@ -50,6 +50,7 @@ class Rankings extends Command {
 					&& ($round->tournament->type == 'tour'
                     || $round->tournament->type == 'exhibition')
                   ) {
+
 					$total_players = 0;
 					$handicap_total = 0;
 					foreach($round->tournament->rounds as $round1) {
