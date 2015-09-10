@@ -1,15 +1,14 @@
 /* */
 
-@font-face { font-family: 'MemoPro Regular'; src: url("fonts/memopro-regular-webfont.eot"); src: url("fonts/memopro-regular-webfont.eot?iefix") format("eot"), url("fonts/memopro-regular-webfont.woff") format("woff"), url("fonts/memopro-regular-webfont.ttf") format("truetype"), url("fonts/memopro-regular-webfont.svg#webfontRj3TQkaX") format("svg"); font-weight: normal; font-style: normal; }
-@font-face { font-family: 'MemoPro Light'; src: url("fonts/memopro-light-webfont.eot"); src: url("fonts/memopro-light-webfont.eot?iefix") format("eot"), url("fonts/memopro-light-webfont.woff") format("woff"), url("fonts/memopro-light-webfont.ttf") format("truetype"), url("fonts/memopro-light-webfont.svg#webfontLlhjLDki") format("svg"); font-weight: normal; font-style: normal; }
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,400,300,500,700);
 
 body {
     background: #f1f1f1;
-    font-family: "Alegreya Sans", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .page-content {
-    background-color: #f6f6f6;
+    background-color: #ffffff;
     min-height: 400px;
     border: solid 1px #FFFFFF;
     padding: 20px;
