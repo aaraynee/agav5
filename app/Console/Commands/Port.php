@@ -11,6 +11,7 @@ use App\Round;
 use App\Course;
 use App\Player;
 use App\Tournament;
+use App\Post;
 
 class Port extends Command {
 
@@ -25,10 +26,10 @@ class Port extends Command {
 
     public function fire()
 	{
-        $this->courses();
+        /*$this->courses();
         $this->tournaments();
         $this->players();
-		$this->rounds();
+		$this->rounds();*/
         $this->posts();
     }
 
@@ -211,41 +212,18 @@ class Port extends Command {
 
 	public function posts()
 	{
-        $ids = [];
         $posts = DB::table('wp_posts')->where('post_type', 'post')->whereIn('post_status', ['publish', 'future'])->get();
         foreach($posts as $post) {
-            $course = Post::firstOrNew(['slug' => $post->post_name]);
-            $course->id = $post->ID;
-            $course->name = $post->post_title;
-            $course->save();
+            $aga_post = Post::firstOrNew(['slug' => $post->post_name]);
+            $aga_post->id = $post->ID;
+            $aga_post->title = $post->post_title;
+            $aga_post->date = $post->post_date;
+            $aga_post->content = $post->post_content;
+            $aga_post->save();
 
             $this->comment('------------');
             $this->info("{$post->post_title} DONE");
             $this->comment('------------');
-
-            $ids[] = $post->ID;
-
-            foreach($attributes as $attribute) {
-                $meta_data[$post->ID][$attribute] = NULL;
-            }
-        }
-
-        $post_meta = DB::table('wp_postmeta')->whereIn('post_id', $ids)->get();
-        foreach($post_meta as $meta) {
-            $meta_data[$meta->post_id][$meta->meta_key] = $meta->meta_value;
-        }
-
-        foreach($ids as $id) {
-            $location = explode("\"", $meta_data[$id]['location']);
-            $course = Course::find($id);
-            $course->scorecard = $meta_data[$id]['scorecard'];
-            $course->address = $location[3];
-            $course->latitude = $location[7];
-            $course->longitude = $location[11];
-            $course->scratch_rating = $meta_data[$id]['scratch_rating'];
-            $course->slope_rating = $meta_data[$id]['slope_rating'];
-            $course->unit = (($meta_data[$id]['unit'] == 'yards') ? 1 : 0);
-            $course->save();
         }
 	}
 }

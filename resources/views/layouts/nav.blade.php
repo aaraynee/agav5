@@ -1,6 +1,6 @@
 <?php
     $nav = [
-        'home', 'schedule', 'players', 'courses', 'grilldcup', 'rankings'
+        'home', 'schedule', 'players', 'courses', 'grilldcup', 'rankings', 'blog'
     ];
 ?>
 

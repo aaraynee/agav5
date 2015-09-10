@@ -22,6 +22,15 @@ Route::get('rankings', 'PagesController@rankings');
 | Player Routes
 |--------------------------------------------------------------------------
 */
+Route::get('blog', 'PostController@blog');
+Route::get('post/{slug}', ['uses' => 'PostController@single', 'as' => 'post']);
+
+
+/*
+|--------------------------------------------------------------------------
+| Player Routes
+|--------------------------------------------------------------------------
+*/
 Route::get('players', 'PlayerController@all');
 Route::get('player/{slug}', ['uses' => 'PlayerController@single', 'as' => 'player']);
 
