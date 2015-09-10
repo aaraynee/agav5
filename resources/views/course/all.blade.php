@@ -26,9 +26,9 @@
             @foreach ($courses as $course)
                 <tr>
                     <td>
-                        @if($course->aga_rating > 85)
+                        @if($course->course_rating > 85)
                             <i class="uk-icon-star"></i>
-                        @elseif($course->aga_rating < 25)
+                        @elseif($course->course_rating < 25)
                             <i class="uk-icon-thumbs-down"></i>
                         @endif
                     </td>
