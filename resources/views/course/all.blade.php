@@ -37,7 +37,7 @@
                     <td>{{ array_sum($course->scorecard_array['distance']) }}</td>
                     <td>{{ $course->scratch_rating }}</td>
                     <td>{{ $course->slope_rating }}</td>
-                    <td>{{ $course->aga_rating }}</td>
+                    <td>{{ $course->course_rating }}</td>
                 </tr>
             @endforeach
         </tbody>

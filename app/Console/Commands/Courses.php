@@ -26,7 +26,7 @@ class Courses extends Command {
             $this->info($course->name);
             $this->info("--------------------");
 
-            $rating = round((40/$course->course_layout) + (40/$course->course_conditions) + (15/$course->green_fees) + (5/$course->clubhouse), 1);
+            $rating = round((35/$course->course_layout) + (35/$course->course_conditions) + (15/$course->green_fees) + (5/$course->clubhouse) + (10/$course->golfers), 1);
 
             $course->course_rating = $rating;
             $course->save();
