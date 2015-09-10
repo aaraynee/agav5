@@ -17,7 +17,8 @@ class Kernel extends ConsoleKernel {
 		'App\Console\Commands\Rankings',
 		'App\Console\Commands\Port',
 		'App\Console\Commands\Rounds',
-		'App\Console\Commands\Tournaments'
+        'App\Console\Commands\Tournaments',
+		'App\Console\Commands\Courses'
 	];
 
 	/**

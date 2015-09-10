@@ -10,7 +10,7 @@ class CourseController extends Controller {
 	}
 
 	public function all() {
-        $data['courses'] = Course::orderBy('slope_rating', 'desc')->get();
+        $data['courses'] = Course::orderBy('course_rating', 'desc')->get();
 		return view('course/all', $data);
 	}
     
