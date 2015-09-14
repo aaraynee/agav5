@@ -208,9 +208,8 @@ font-weight: 700;
             </thead>
             @foreach($tournament->matchups as $matchup)
                 <tr>
-                    <td>{{ $matchup->player1->name }}</td>
+                    <td>{{ $matchup->player1->name }} ({{ ceil((($matchup->player1->handicap * ($tournament->course->slope_rating / 113)) - ($matchup->player2->handicap * ($tournament->course->slope_rating / 113))) / 2) }})</td>
                     <td>{{ (($matchup->winner) ? "Team {$team[$matchup->winner]}" : '') }} {{ $matchup->result }}</td>
-                    {{--<td>{{ ceil((($matchup->player1->handicap * ($tournament->course->slope_rating / 113)) - ($matchup->player2->handicap * ($tournament->course->slope_rating / 113))) / 2) }}</td>--}}
                     <td>{{ $matchup->player2->name }}</td>
                 </tr>
             @endforeach

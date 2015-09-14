@@ -172,6 +172,8 @@ class Tournaments extends Command {
                                 $winner = $matchup->player_1;
                             } elseif($final_score > 0) {
                                 $winner = $matchup->player_2;
+                            } else {
+                                $winner = NULL;
                             }
 
                             $final_score = abs($final_score);

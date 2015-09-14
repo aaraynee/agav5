@@ -64,30 +64,54 @@
                 </thead>
             </table>
             <table class="uk-table latest">
+
+                @if($tournament->scoring == 'stroke')
                 <thead>
-                    <tr>
-                        <th colspan="4">Latest Scores</th>
-                    </tr>
-                    <tr class="tournament">
-                        <th colspan="4">{{ $tournament->name }}</th>
-                    </tr>
-                    <tr>
-                        <th>Pos</th>
-                        <th></th>
-                        <th>Score</th>
-                        <th>Points</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($tournament->rounds as $round)
                         <tr>
-                            <td>{{ $round->position }}</td>
-                            <td>{{ $round->player->name }}</td>
-                            <td>{{ $round->adjusted }}</td>
-                            <td>{{ $round->points }}</td>
+                            <th colspan="4">Latest Scores</th>
                         </tr>
-                    @endforeach
-                </tbody>
+                        <tr class="tournament">
+                            <th colspan="4">{{ $tournament->name }}</th>
+                        </tr>
+                        <tr>
+                            <th>Pos</th>
+                            <th></th>
+                            <th>Score</th>
+                            <th>Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($tournament->rounds as $round)
+                            <tr>
+                                <td>{{ $round->position }}</td>
+                                <td>{{ $round->player->name }}</td>
+                                <td>{{ $round->adjusted }}</td>
+                                <td>{{ $round->points }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                @elseif($tournament->scoring == 'cup')
+                        <thead>
+                            <tr>
+                                <th colspan="4">Latest Scores</th>
+                            </tr>
+                            <tr class="tournament">
+                                <th colspan="4">{{ $tournament->name }}</th>
+                            </tr>
+                            <tr>
+                                <th>Team 1</th>
+                                <th></th>
+                                <th>Team 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $tournament->team_1 }}</td>
+                                <td>-</td>
+                                <td>{{ $tournament->team_2 }}</td>
+                            </tr>
+                        </tbody>
+                @endif
             </table>
         </div>
     </div>
