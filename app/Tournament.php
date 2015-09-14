@@ -8,6 +8,7 @@ class Tournament extends Model {
 
     protected $guarded = [];
 
+
     public function season() {
         return $this->belongsTo('App\Season');
     }

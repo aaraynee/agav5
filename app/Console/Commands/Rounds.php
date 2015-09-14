@@ -35,14 +35,16 @@ class Rounds extends Command {
 
             $i = 1;
             foreach($player->rounds as $round) {
-                if($round->status == 0) {
-                    $this->process($round);
-                    $round->status = $this->comment("PROCESSING {$i} of {$total_rounds} ({$round->id})");
-                } elseif($round->status == 1 && $round->holes_played == 18) {
-                    $this->calculate($round, $player);
-                    $round->status = $this->comment("PROCESSING {$i} of {$total_rounds} ({$round->id})");
+                if(!$round->matchup_id) {
+                    if ($round->status == 0) {
+                        $this->process($round);
+                        $round->status = $this->comment("PROCESSING {$i} of {$total_rounds} ({$round->id})");
+                    } elseif ($round->status == 1 && $round->holes_played == 18) {
+                        $this->calculate($round, $player);
+                        $round->status = $this->comment("PROCESSING {$i} of {$total_rounds} ({$round->id})");
+                    }
+                    $i++;
                 }
-                $i++;
             }
 
 

@@ -26,11 +26,11 @@ class Tournaments extends Command {
     {
         $tournaments = Tournament::all();
         foreach($tournaments as $tournament) {
-            $this->info("--------------------");
-            $this->info($tournament->name);
-            $this->info("--------------------");
-
             if($tournament->scoring == 'stroke' && $tournament->completed != 1) {
+
+                $this->info("--------------------");
+                $this->info($tournament->name);
+                $this->info("--------------------");
 
                 $tournament_scores = [];
 
@@ -119,10 +119,90 @@ class Tournaments extends Command {
                         $round->save();
                     }
                 }
-            }
 
-            $tournament->completed = 1;
-            $tournament->save();
+                $tournament->completed = 1;
+                $tournament->save();
+            } elseif($tournament->scoring == 'cup' && $tournament->completed != 1) {
+
+                $players = Player::all();
+                foreach($players as $player) {
+                    $team[$player->id] = $player->team;
+                }
+
+                $team_score[1] = 0;
+                $team_score[2] = 0;
+
+                $this->info("--------------------");
+                $this->info($tournament->name);
+                $this->info("--------------------");
+
+                foreach($tournament->matchups as $matchup) {
+                    $this->comment("--------------------");
+                    $this->comment("{$matchup->player1->firstname} vs. {$matchup->player2->firstname}");
+                    $this->comment("--------------------");
+
+                    $winner = NULL;
+                    $scorecard = [];
+                    $score = [];
+                    $final_score = 0;
+
+                    foreach ($matchup->rounds as $round) {
+                        $holes_played = count($round->score_array);
+                        $scorecard[$round->player_id] = $round->score_array;
+                        $score[$round->player_id] = 0;
+                    }
+
+                    if($holes_played < 10) {
+                        $total_holes = 9;
+                    }
+
+                    for($i=1;$i<=$holes_played;$i++) {
+                        if(isset($scorecard[$matchup->player_1][$i-1]) && isset($scorecard[$matchup->player_2][$i-1])) {
+                            if($scorecard[$matchup->player_1][$i-1] > $scorecard[$matchup->player_2][$i-1]) {
+                                $score[$matchup->player_2]++;
+                            }elseif($scorecard[$matchup->player_1][$i-1] < $scorecard[$matchup->player_2][$i-1]) {
+                                $score[$matchup->player_1]++;
+                            }
+                        }
+
+                        if(isset($score[$matchup->player_1]) && isset($score[$matchup->player_2])) {
+                            $final_score = $score[$matchup->player_2] - $score[$matchup->player_1];
+
+                            if($final_score < 0) {
+                                $winner = $matchup->player_1;
+                            } elseif($final_score > 0) {
+                                $winner = $matchup->player_2;
+                            }
+
+                            $final_score = abs($final_score);
+
+                            if( ($holes_played - $i) < $final_score) {
+                                $holes_left = $holes_played - $i;
+                                $team_score[$team[$winner]]++;
+                                break;
+                            }
+                        }
+                    }
+
+                    if($final_score) {
+                        if ($holes_left == 0) {
+                            $final_score = "$final_score UP";
+                        } else {
+                            $final_score = "{$final_score}&{$holes_left}";
+                        }
+                    } else {
+                        $final_score = "AS";
+                    }
+
+                    $matchup->winner = $winner;
+                    $matchup->result = $final_score;
+                    $matchup->save();
+                }
+
+                $tournament->team_1 = $team_score[1];
+                $tournament->team_2 = $team_score[2];
+                $tournament->save();
+            }
         }
     }
 }

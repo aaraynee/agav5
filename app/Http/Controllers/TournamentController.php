@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Season;
 use App\Tournament;
+use App\Player;
 use App\Round;
 
 class TournamentController extends Controller {
@@ -18,6 +19,13 @@ class TournamentController extends Controller {
 
     public function single($slug) {
         $data['tournament'] = Tournament::where('slug', $slug)->first();
+		$team = [];
+		if($data['tournament']->scoring == 'cup') {
+			$players = Player::all();
+			foreach($players as $player) {
+				$data['team'][$player->id] = $player->team;
+			}
+		}
 		return view('tournament/single', $data);
 	}
 }

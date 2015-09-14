@@ -8,6 +8,10 @@ class Matchup extends Model {
 
     protected $guarded = [];
 
+    public function rounds() {
+        return $this->hasMany('App\Round');
+    }
+
     public function player1() {
         return $this->hasOne('App\Player', 'id', 'player_1');
     }

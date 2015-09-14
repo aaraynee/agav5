@@ -175,13 +175,32 @@ font-weight: 700;
         <style>
             .cup tr td { text-align:center; }
 
+            .cup-score { border: 1px solid #d8d8d8; border-collapse: collapse; }
+            .cup-score tr th { font-size: 20px;text-align:center; }
+            .cup-score tr td { font-size: 100px;text-align:center; padding: 50px; }
+
         </style>
+
+        <table class="uk-table cup-score">
+            <thead>
+                <tr>
+                    <th>Team 1</th>
+                    <th></th>
+                    <th>Team 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $tournament->team_1 }}</td>
+                    <td>-</td>
+                    <td>{{ $tournament->team_2 }}</td>
+                </tr>
+            </tbody>
+        </table>
 
         <table class="uk-table cup">
             <thead>
                 <tr>
-                    <th></th>
-                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -190,9 +209,8 @@ font-weight: 700;
             @foreach($tournament->matchups as $matchup)
                 <tr>
                     <td>{{ $matchup->player1->name }}</td>
-                    <td>-</td>
-                    <td>{{ ceil((($matchup->player1->handicap * ($tournament->course->slope_rating / 113)) - ($matchup->player2->handicap * ($tournament->course->slope_rating / 113))) / 2) }}</td>
-                    <td>-</td>
+                    <td>{{ (($matchup->winner) ? "Team {$team[$matchup->winner]}" : '') }} {{ $matchup->result }}</td>
+                    {{--<td>{{ ceil((($matchup->player1->handicap * ($tournament->course->slope_rating / 113)) - ($matchup->player2->handicap * ($tournament->course->slope_rating / 113))) / 2) }}</td>--}}
                     <td>{{ $matchup->player2->name }}</td>
                 </tr>
             @endforeach
